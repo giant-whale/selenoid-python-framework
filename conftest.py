@@ -1,3 +1,4 @@
+import allure
 import pytest
 import time
 
@@ -17,27 +18,26 @@ def pytest_addoption(parser):
 
 @pytest.fixture(autouse=True)
 def driver(request):
-    # driver setup start
-    browser = request.config.getoption('--browser')
-    browser_capabilities = None
-    if browser == 'chrome':
-        browser_capabilities = CHROME
-    elif browser == 'firefox':
-        browser_capabilities = FIREFOX
+    with allure.step('Driver setup: parsing parameters'):
+        browser = request.config.getoption('--browser')
+        browser_capabilities = None
+        if browser == 'chrome':
+            browser_capabilities = CHROME
+        elif browser == 'firefox':
+            browser_capabilities = FIREFOX
 
-    if request.config.getoption('--vnc'):
-        browser_capabilities['enableVNC'] = True
-    if request.config.getoption('--video'):
-        browser_capabilities['enableVideo'] = True
-    browser_capabilities['name'] = f'{browser}:{request.node.name}:{time.ctime()}'
+        if request.config.getoption('--vnc'):
+            browser_capabilities['enableVNC'] = True
+        if request.config.getoption('--video'):
+            browser_capabilities['enableVideo'] = True
+        browser_capabilities['name'] = f'{browser}:{request.node.name}:{time.ctime()}'
 
     webdriver = Driver(command_executor=SELENOID_REMOTE_URL, desired_capabilities=browser_capabilities)
-    # driver setup end
 
     yield webdriver
 
-    # driver teardown
-    try:
-        webdriver.quit()
-    finally:
-        webdriver.__class__._instances = {}
+    with allure.step('Driver teardown'):
+        try:
+            webdriver.quit()
+        finally:
+            webdriver.__class__._instances = {}
