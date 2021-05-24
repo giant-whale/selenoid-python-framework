@@ -1,9 +1,11 @@
+import allure
 from selenium.common.exceptions import JavascriptException
 
 from core.decorators import wait_until
 from core.driver import Driver
 
 
+@allure.step('Waiting for page to change to a new page')
 def wait_for_page_to_change():
     @wait_until()
     def check_if_page_changed():
@@ -15,6 +17,7 @@ def wait_for_page_to_change():
     check_if_page_changed()
 
 
+@allure.step('Waiting for page to complete loading')
 def wait_for_page_to_load():
     @wait_until()
     def check_page_dom_state():

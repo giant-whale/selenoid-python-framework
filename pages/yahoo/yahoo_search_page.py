@@ -7,7 +7,7 @@ class YahooSearchPage(Page):
     BASE_PAGE_URL = "https://search.yahoo.com/search?p="
 
     YahooSearchBar = YahooSearchBar()
-    result_number = Locator('//*[contains(@class,"compPagination")]/span')
+    result_number = Locator('//*[contains(@class,"compPagination")]/span', 'Result Number')
 
     class Header:
-        home_logo = Locator('//a[@id="logo"]')
+        home_logo = Locator('//a[@id="logo"]', 'Home Logo')
