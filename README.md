@@ -11,4 +11,6 @@ Python 3.8
 ## Configuration
 Before running tests, change `SELENOID_REMOTE_URL` variable in `core/settings.py` to your Selenoid address.
 ## Run your tests
-Simply execute command `pytest tests/` to run all tests.
+Choose your method:
+- Single-thread — execute command `pytest tests/` to run all tests in 1 thread;
+- Multi-thread — execute command `pytest -n 5 tests/` to run all tests in 5 threads.
