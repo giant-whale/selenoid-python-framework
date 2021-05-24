@@ -1,3 +1,5 @@
+import allure
+
 from core.driver import Driver
 
 
@@ -12,12 +14,14 @@ class Page:
         super().__init__()
 
     def open(self):
-        Driver().get(self.BASE_PAGE_URL)
-        return self
+        with allure.step(f'Opening page "{self.__class__.__name__}"'):
+            Driver().get(self.BASE_PAGE_URL)
+            return self
 
     def open_with_path(self, path: str):
-        Driver().get(self.BASE_PAGE_URL + path)
-        return self
+        with allure.step(f'Opening page "{self.__class__.__name__}" with additional path="{path}"'):
+            Driver().get(self.BASE_PAGE_URL + path)
+            return self
 
     @staticmethod
     def current_url() -> str:
