@@ -15,7 +15,7 @@ class Locator:
     webelement = None
     name = None
 
-    def __init__(self, xpath: str, name: str):
+    def __init__(self, name: str, xpath: str):
         self.xpath = xpath
         self.name = name
 
