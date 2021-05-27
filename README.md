@@ -18,6 +18,17 @@ Before running tests, change `SELENOID_REMOTE_URL` variable in `core/settings.py
 ## Browsers
 List of available browsers in `core/browsers.py`. To add and use more browsers, check Selenoid documentation – https://aerokube.com/selenoid/latest/#_browser_images
 
+## Mobile Emulation
+Mobile emulation is available only for Google Chrome. 
+
+Usage: add decorator `@pytest.mark.mobile` to your test on class to use mobile emulation. 
+
+To add more mobile devices:
+1. Add new mark to `pytest.ini`;
+2. Add new devices in `core/mobile_emulation.py`;
+3. Change `is_mobile` function in `conftest.py` — it requires new logic;
+4. Add new branch for driver setup in `conftest.py`. 
+
 ## Run your tests
 Multiple threads:
 - Single-thread — execute command `pytest tests/` to run all tests in 1 thread;
