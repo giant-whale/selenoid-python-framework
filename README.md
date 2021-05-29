@@ -39,4 +39,4 @@ Select browser:
 - Execute command `pytest tests/ --browser=firefox` to run all tests using Mozilla Firefox;
 
 Generate Allure report:
-- Execute command `pytest tests/ --alluredir=./allure_results` to run all tests and generate Allure report files in directory `./allure_reports`. To run human-readable Allure report, execute command from the same directory `allure allure_results/`.    
+- Execute command `pytest tests/ --alluredir=./allure_results` to run all tests and generate Allure report files in directory `./allure_reports`. To run human-readable Allure report, execute command from the same directory `allure serve ./allure_results`.    
