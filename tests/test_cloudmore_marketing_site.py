@@ -1,5 +1,6 @@
 import pytest
 
+from core.driver import Driver
 from pages.cloudmore.cloudmore_marketing_page import (
     CloudmoreMainPage,
     CloudmorePlatformPage,
@@ -7,7 +8,8 @@ from pages.cloudmore.cloudmore_marketing_page import (
     CloudmoreAboutUsPage,
     CloudmoreBlogPage,
     CloudmoreCaseStudiesPage,
-    CloudmoreContactUsPage
+    CloudmoreContactUsPage,
+    CloudmoreSearchPage,
 )
 
 
@@ -36,3 +38,37 @@ class TestCloudmoreDesktop:
         page_to_open().open()
         for locator in locators:
             assert locator().is_on_page()
+
+    def test_cloudmore_search_and_screenshot_desktop(self):
+        string_to_search = 'Högset'
+
+        page = CloudmoreMainPage().open()
+        page.Header.search_button().click()
+        page.Search.search_input().input(string_to_search)
+        page.Search.search_submit().click(wait_for_new_page=True)
+
+        page = CloudmoreSearchPage()
+        search_result = page.get_all_search_results()
+        assert len(search_result) > 0
+
+        page.navigate_to_page(3)
+        Driver().attach_screenshot()
+
+
+@pytest.mark.mobile
+class TestCloudmoreMobile:
+
+    def test_cloudmore_search_and_screenshot_mobile(self):
+        string_to_search = 'Högset'
+
+        page = CloudmoreMainPage().open()
+        page.Header.search_button().click()
+        page.Search.search_input().input(string_to_search)
+        page.Search.search_submit().click(wait_for_new_page=True)
+
+        page = CloudmoreSearchPage()
+        search_result = page.get_all_search_results()
+        assert len(search_result) > 0
+
+        page.navigate_to_page(3)
+        Driver().attach_screenshot()
