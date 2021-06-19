@@ -55,9 +55,9 @@ class TestCloudmoreDesktop:
         Driver().attach_screenshot()
 
 
-@pytest.mark.mobile
 class TestCloudmoreMobile:
 
+    @pytest.mark.mobile
     def test_cloudmore_search_and_screenshot_mobile(self):
         string_to_search = 'Högset'
 
