@@ -13,10 +13,6 @@ from core.mobile_emulation import device_iphone8
 from core.settings import WEBDRIVER_LOCAL_PATH
 
 
-def pytest_addoption(parser):
-    parser.addoption('--browser', action='store', default='chrome')
-
-
 def is_mobile(request) -> bool:
     markers = request.node.own_markers
     if [mark for mark in markers if mark.name.lower() == 'mobile']:
@@ -30,7 +26,7 @@ def driver(request):
     with allure.step('Driver setup: parsing parameters'):
         mobile = is_mobile(request=request)
 
-        browser = request.config.getoption('--browser')
+        browser = 'chrome'
         browser_capabilities = None
 
         if browser == 'chrome':
