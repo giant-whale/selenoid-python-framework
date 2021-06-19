@@ -29,4 +29,4 @@ Multiple threads:
 - Multi-thread — execute command `pytest tests/ -n 5` to run all tests in 5 threads.
 
 Generate Allure report:
-- Execute command `pytest tests/ --alluredir=./allure_results` to run all tests and generate Allure report files in directory `./allure_reports`. To run human-readable Allure report, execute command from the same directory `allure allure_results/`.    
+- Execute command `pytest tests/ --alluredir=./allure_results` to run all tests and generate Allure report files in directory `./allure_results`. To run human-readable Allure report, execute command from the same directory `allure allure_results/`.    
