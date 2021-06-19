@@ -6,17 +6,14 @@ from selenium.webdriver import ChromeOptions
 
 from core.browsers import (
     CHROME,
-    FIREFOX,
 )
 from core.driver import Driver
 from core.exceptions import DriverSetupException
 from core.mobile_emulation import device_iphone8
-from core.settings import SELENOID_REMOTE_URL
+from core.settings import WEBDRIVER_LOCAL_PATH
 
 
 def pytest_addoption(parser):
-    parser.addoption('--vnc', action='store_true', default=False)
-    parser.addoption('--video', action='store_true', default=False)
     parser.addoption('--browser', action='store', default='chrome')
 
 
@@ -42,19 +39,12 @@ def driver(request):
                 chrome_options.add_experimental_option('mobileEmulation', device_iphone8)
             browser_capabilities = chrome_options.to_capabilities()
             browser_capabilities['version'] = CHROME['browserVersion']
+        else:
+            raise DriverSetupException(f'Unsupported browser — {browser}')
 
-        elif browser == 'firefox':
-            browser_capabilities = FIREFOX
-            if mobile:
-                raise DriverSetupException('Unable to use mobile emulation with Firefox - use Chrome instead')
-
-        if request.config.getoption('--vnc'):
-            browser_capabilities['enableVNC'] = True
-        if request.config.getoption('--video'):
-            browser_capabilities['enableVideo'] = True
         browser_capabilities['name'] = f'{browser}:{request.node.name}:{time.ctime()}'
 
-    webdriver = Driver(command_executor=SELENOID_REMOTE_URL, desired_capabilities=browser_capabilities)
+    webdriver = Driver(executable_path=WEBDRIVER_LOCAL_PATH, desired_capabilities=browser_capabilities)
     webdriver.set_window_size(1920, 1080)
 
     yield webdriver

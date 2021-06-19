@@ -2,7 +2,7 @@ import random
 
 import allure
 from allure_commons.types import AttachmentType
-from selenium.webdriver import Remote
+from selenium.webdriver import Chrome
 
 
 class Singleton(type):
@@ -14,7 +14,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class Driver(Remote, metaclass=Singleton):
+class Driver(Chrome, metaclass=Singleton):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
