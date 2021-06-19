@@ -1,5 +1,8 @@
 import allure
-from selenium.common.exceptions import JavascriptException
+from selenium.common.exceptions import (
+    JavascriptException,
+    WebDriverException,
+)
 
 from core.decorators import wait_until
 from core.driver import Driver
@@ -12,7 +15,7 @@ def wait_for_page_to_change():
         try:
             Driver().execute_script('return oldPage;')
             return False
-        except JavascriptException:
+        except (JavascriptException, WebDriverException):
             return True
     check_if_page_changed()
 
