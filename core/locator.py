@@ -51,11 +51,6 @@ class Locator:
             else:
                 self.webelement.click()
 
-    def input(self, string: str):
-        self._webelement_required()
-        with allure.step(f'Input "{string}" into {self.name}'):
-            self.webelement.send_keys(string)
-
     def is_on_page(self) -> bool:
         with allure.step(f'Check if element {self.name} is on page'):
             try:
@@ -63,3 +58,15 @@ class Locator:
                 return True
             except:
                 return False
+
+
+class Input(Locator):
+    def input(self, string: str):
+        self._webelement_required()
+        with allure.step(f'Input "{string}" into {self.name}'):
+            self.webelement.send_keys(string)
+
+    def value(self) -> str:
+        self._webelement_required()
+        with allure.step(f'Get value from {self.name}'):
+            return self.webelement.get_attribute("value")
