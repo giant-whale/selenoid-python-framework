@@ -10,9 +10,6 @@ class Page:
 
     BASE_PAGE_URL = 'OverrideMe'
 
-    def __init__(self):
-        super().__init__()
-
     def open(self):
         with allure.step(f'Opening page "{self.__class__.__name__}"'):
             Driver().get(self.BASE_PAGE_URL)
