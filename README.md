@@ -4,7 +4,7 @@ This is a python PageObject framework for Selenoid hub, replacement of Selenium 
 Read more about Selenoid — https://aerokube.com/selenoid/
 
 ## Requirements
-Python 3.8
+Python 3.11
 
 ## Installation
 1. Follow this guide to install and run Selenoid — https://aerokube.com/selenoid/latest/

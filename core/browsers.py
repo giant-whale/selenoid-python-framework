@@ -1,9 +1,9 @@
 CHROME = {
     'browserName': 'chrome',
-    'browserVersion': '90.0',
+    'browserVersion': '113.0',
 }
 
 FIREFOX = {
     'browserName': 'firefox',
-    'browserVersion': '88.0',
+    'browserVersion': '113.0',
 }
