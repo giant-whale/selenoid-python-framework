@@ -18,6 +18,11 @@ class TestYahoo:
         page.Header.home_logo.click(wait_for_new_page=True)
         assert page.current_url() == YahooMainPage.BASE_PAGE_URL
 
+    def test_yahoo_search_result_contains_search_query(self):
+        page = YahooSearchPage().open_with_path('"test"')
+        for block in page.result_item.get_all_blocks():
+            assert ("test" in block.preview.text().lower()) or ("test" in block.title.text().lower())
+
     @pytest.mark.mobile
     def test_yahoo_mainpage_mobile(self):
         page = YahooMainPageMobile().open()
