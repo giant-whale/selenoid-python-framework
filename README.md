@@ -1,3 +1,5 @@
+# Framework is no longer maintained, check Playwright instead - https://github.com/giant-whale/playwright-python-framework
+
 # Python framework for Selenoid
 This is a python PageObject framework for Selenoid hub, replacement of Selenium hub. 
 
